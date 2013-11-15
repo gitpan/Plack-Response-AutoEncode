@@ -5,7 +5,7 @@ use parent 'Plack::Response';
 use Carp ();
 use Email::MIME::ContentType () ;
 use Encode;
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 sub finalize {
     my $self = shift;
@@ -18,6 +18,12 @@ sub finalize {
                 $self->_encode_gracefully( $self->content )
             ;
             $self->content($content);
+
+            if ($self->{encoding}) {
+                $data->{attributes}{charset} = $self->{encoding}->mime_name;
+            }
+
+            $self->headers->{'content-type'} = $self->_build_content_type($data);
         }
     }
     $self->SUPER::finalize(@_);
@@ -26,18 +32,26 @@ sub finalize {
 sub _encode_gracefully {
     my ($self, $charset, $str) = @_;
 
-    my $is_utf8  = Encode::is_utf8($str);
-    my $encoding = Encode::find_encoding($charset);
-    unless ($encoding) {
+    $self->{encoding} = Encode::find_encoding($charset);
+    unless ($self->{encoding}) {
         Carp::carp qq![Error] Invalid charset was detected ("$charset")!;
 
-        # If $str is perl-string, return it that is encoded by UTF-8 for the time being...
-        return $is_utf8 ? Encode::encode('utf8', $str) : $str;
+        # $str is must perl-string. Return it that is encoded by UTF-8 for the time being unless defined 'encoding'...
+        return Encode::encode('utf8', $str);
     }
 
-    $is_utf8 ? $encoding->encode($str) : $str;
+    $self->{encoding}->encode($str);
 }
 
+sub _build_content_type {
+    my ($self, $data) = @_;
+
+    my $content_type_str = "$data->{discrete}/$data->{composite}";
+    for my $k (keys %{$data->{attributes}}) {
+        $content_type_str .= ";$k=$data->{attributes}->{$k}";
+    }
+    return $content_type_str;
+}
 1;
 __END__
 
@@ -65,6 +79,8 @@ in your PSGI application
 Plack::Response::AutoEncode is subclass of Plack::Response.
 
 When application returns a response that contains "text/*" in Content-Type header, encode automatically each unencoded content by charset that is in Content-Type header.
+
+You B<MUST> set content-body data in perl-string.
 
 For example. If you want to response with Shift_JIS encoding, you can it as followings.
 

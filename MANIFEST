@@ -8,5 +8,7 @@ lib/Plack/Response/AutoEncode.pm
 t/00_compile.t
 t/11_basic.t
 t/12_exceptional.t
+t/13_force_valid_charset.t
+t/14_pass_bytecode.t
 META.yml
 MANIFEST
