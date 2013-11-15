@@ -1,0 +1,47 @@
+---
+abstract: 'Plack response with automatic encoding feature'
+author:
+  - 'ytnobody <ytnobody@gmail.com>'
+build_requires:
+  Capture::Tiny: 0
+  HTTP::Request::Common: 0
+  Plack::Test: 0
+  Test::More: 0.98
+configure_requires:
+  CPAN::Meta: 0
+  CPAN::Meta::Prereqs: 0
+  Module::Build: 0.38
+dynamic_config: 0
+generated_by: 'Minilla/v0.6.3, CPAN::Meta::Converter version 2.132140'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Plack-Response-AutoEncode
+no_index:
+  directory:
+    - t
+    - xt
+    - inc
+    - share
+    - eg
+    - examples
+    - author
+provides:
+  Plack::Response::AutoEncode:
+    file: lib/Plack/Response/AutoEncode.pm
+    version: 0.01
+requires:
+  Email::MIME::ContentType: 0
+  Encode: 0
+  Plack::Request: 0
+  Plack::Response: 0
+  parent: 0
+  perl: 5.008001
+resources:
+  bugtracker: https://github.com/ytnobody/Plack-Response-AutoEncode/issues
+  homepage: https://github.com/ytnobody/Plack-Response-AutoEncode
+  repository: git://github.com/ytnobody/Plack-Response-AutoEncode.git
+version: 0.01
+x_contributors:
+  - 'moznion <moznion@gmail.com>'

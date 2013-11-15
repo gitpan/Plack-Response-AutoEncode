@@ -1,0 +1,81 @@
+{
+   "abstract" : "Plack response with automatic encoding feature",
+   "author" : [
+      "ytnobody <ytnobody@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Minilla/v0.6.3",
+   "license" : "perl_5",
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Plack-Response-AutoEncode",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "xt",
+         "inc",
+         "share",
+         "eg",
+         "examples",
+         "author"
+      ]
+   },
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "CPAN::Meta" : "0",
+            "CPAN::Meta::Prereqs" : "0",
+            "Module::Build" : "0.38"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::CPAN::Meta" : "0",
+            "Test::MinimumVersion" : "0.10108",
+            "Test::Pod" : "1.41",
+            "Test::Spellunker" : "v0.2.7"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Email::MIME::ContentType" : "0",
+            "Encode" : "0",
+            "Plack::Request" : "0",
+            "Plack::Response" : "0",
+            "parent" : "0",
+            "perl" : "5.008001"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Capture::Tiny" : "0",
+            "HTTP::Request::Common" : "0",
+            "Plack::Test" : "0",
+            "Test::More" : "0.98"
+         }
+      }
+   },
+   "provides" : {
+      "Plack::Response::AutoEncode" : {
+         "file" : "lib/Plack/Response/AutoEncode.pm",
+         "version" : "0.01"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/ytnobody/Plack-Response-AutoEncode/issues"
+      },
+      "homepage" : "https://github.com/ytnobody/Plack-Response-AutoEncode",
+      "repository" : {
+         "url" : "git://github.com/ytnobody/Plack-Response-AutoEncode.git",
+         "web" : "https://github.com/ytnobody/Plack-Response-AutoEncode"
+      }
+   },
+   "version" : "0.01",
+   "x_contributors" : [
+      "moznion <moznion@gmail.com>"
+   ]
+}
